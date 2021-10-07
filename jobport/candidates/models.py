@@ -1,7 +1,8 @@
 # Create your models here.
 
-from django.contrib.auth.models import AbstractUser, User, Group
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
+from django.utils import timezone
 
 #from candidates.managers import UserManager
 
@@ -32,16 +33,17 @@ class User(AbstractUser):
 
  """
 
- class Candidates(models.Model):
+
+class Candidates(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
     bio = models.TextField()
     #job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name="candidates")
     created_at = models.DateTimeField(default=timezone.now)
-    skills = models.CharField()
-    nationality = models.CharField()
+    skills = models.CharField(max_length=56)
+    nationality = models.CharField(max_length=56)
     age = models.SmallIntegerField()
-    certificate_issuing_country = models.CharField() # will switch to countryfield or enums laer
+    certificate_issuing_country = models.CharField(max_length=56) # will switch to countryfield or enums laer
     have_passport = models.BooleanField(default=True) #  choices can be used too
     valid_us_visa = models.BooleanField(default=False) # choices can be used as well based on need
     status = models.SmallIntegerField(default=2)
