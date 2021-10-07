@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.renderers import AdminRenderer
-from . serializer import UserSerializer
+from . serializer import UserSerializer, CandidatesSerializer, GroupSerializer
+from . models import Candidates
 from django_filters import rest_framework as filters
 
 
@@ -15,3 +16,27 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     renderer_classes = [AdminRenderer]
     filterset_fields = ('username', 'email',)
+
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    renderer_classes = [AdminRenderer]
+    filterset_fields = ('name', 'url',)
+
+
+
+class CandidatesViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows candidates to be viewed or edited.
+    """
+    queryset = Candidates.objects.all().order_by('-created_at')
+    serializer_class = CandidatesSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    renderer_classes = [AdminRenderer]
+    filterset_fields = ('title', 'skills', 'nationality', 'age')
