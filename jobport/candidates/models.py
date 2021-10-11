@@ -73,3 +73,33 @@ Skills, Nationality, Age, Certificate issuing country, Having Passport (Yes/No),
 Sorting as per age, Passport status, Visa status [also years of experience, could be useful right?]
 
 '''
+
+
+class Passport(models.Model):
+    passport_number = None
+    issuing_country = None
+    place_of_issue = None
+    date_expires = None 
+
+
+class Visa(models.Model):
+    visa_type = None
+    provider_country = None
+    issue_date = None
+    expire_date = None
+    need_visa_sponsor = None
+
+
+class Country(models.Model):
+    name = None
+    country_code = None
+
+
+class Certificates(models.Model):
+    name = None
+    certificate_number = None
+    url = None
+    provider = None
+    country_issued = None
+    date_issued = None
+    date_expired = None
