@@ -9,6 +9,7 @@ from django.utils import timezone
 GENDER_CHOICES = (("male", "Male"), ("female", "Female"))
 
 """
+test comment
 # commenting out for now, can be used in future to teach how to customize built in User Model
 
 class User(AbstractUser):
